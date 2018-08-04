@@ -1,0 +1,13 @@
+{
+    "name": "infoq",
+    "login_info": {
+        "url": "https://infoq.jp/",
+        "opener": { "id": "css", "selector": "#modal-open_login" },
+        "id": "love3factory@gmail.com",
+        "id_text": { "id": "css", "selector": "#AccountEmail" },
+        "password": "oo5XvmdR7moiOdLoOXzA",
+        "password_text": { "id": "css", "selector": "#AccountPassword" },
+        "login_button": { "id": "css", "selector": "#AccountIndexForm input[type='submit']" },
+        "logout_button": { "id": "css", "selector": "#AccountIndexForm input.btn_logout" }
+    }
+}
