@@ -1,12 +1,12 @@
 import sys
 import io
-from selenium import webdriver
-import host
+from host import InfoQHost
 
 # メイン
 def main():
-    h = host.InfoQHost()
+    h = InfoQHost()
     h.login()
+    h.start()
     h.logout()
     h.close()
 

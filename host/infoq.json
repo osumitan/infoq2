@@ -1,6 +1,6 @@
 {
     "name": "infoq",
-    "login_info": {
+    "login": {
         "url": "https://infoq.jp/",
         "opener": { "id": "css", "selector": "#modal-open_login" },
         "id": "love3factory@gmail.com",
@@ -9,5 +9,10 @@
         "password_text": { "id": "css", "selector": "#AccountPassword" },
         "login_button": { "id": "css", "selector": "#AccountIndexForm input[type='submit']" },
         "logout_button": { "id": "css", "selector": "#AccountIndexForm input.btn_logout" }
+    },
+    "enquete_list": {
+        "top_page_button": { "id": "css", "selector": "div.headerWithBox a[href='/']" },
+        "enquete_list_tab": { "id": "css", "selector": "span[data-index='1']" },
+        "enquete_link_list": { "id": "xpath", "selector": "//*[@id='enquete-list-ssp']/li[contains(@class,'right-enqList_list')]/a[contains(@onclick,'enqRedirect.do')]" }
     }
 }
