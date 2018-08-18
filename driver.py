@@ -11,9 +11,9 @@ class Driver:
     # ドライバ
     __drv = None
     # リトライ間隔（秒）
-    RETRY_INTERVAL = 1
+    RETRY_INTERVAL = 2
     # リトライ回数
-    RETRY_LIMIT = 30
+    RETRY_LIMIT = 10
 
     # コンストラクタ
     def __init__(self):
@@ -21,7 +21,7 @@ class Driver:
         self.__drv = webdriver.Chrome("../lib/chromedriver.exe")
         self.__drv.set_window_size(1152, 768)
         self.__drv.set_window_position(376, 44)
-        self.__drv.set_page_load_timeout(60)
+        self.__drv.set_page_load_timeout(20)
     
     # ウィンドウを閉じる
     def close_window(self):
@@ -127,20 +127,30 @@ class Driver:
     # wait: 見つかるまで待つか
     # return: bool
     def exists(self, by, wait = False):
-        return len(self.find_element_list(by, wait)) >= 1
+        return len(self.find_element_list(by, wait)) >= 1 if not by is None else False
     
     # クリック
     # by: By
     # return: クリックしたか
     def click(self, by):
         if self.exists(by):
-            self.click_element(self.find_element(by))
-            return True
+            retry = 0
+            while True:
+                try:
+                    return self.click_element(self.find_element(by))
+                except exceptions.StaleElementReferenceException as e:
+                    # リトライ
+                    if retry < self.RETRY_LIMIT:
+                        retry += 1
+                        time.sleep(self.RETRY_INTERVAL)
+                    else:
+                        raise e
         else:
             return False
     
     # エレメントをクリック
     # elm: エレメント
+    # return: クリックしたか
     def click_element(self, elm):
         # エラー発生時はリトライ
         retry = 0
@@ -152,8 +162,12 @@ class Driver:
                 ac.perform()
                 # クリック
                 elm.click()
-                break
+                return True
+            except exceptions.StaleElementReferenceException as e:
+                # 呼出元でリトライするためraise（find_elementをやり直す）
+                raise e
             except exceptions.WebDriverException as e:
+                # リトライ
                 if retry < self.RETRY_LIMIT:
                     retry += 1
                     time.sleep(self.RETRY_INTERVAL)
@@ -168,9 +182,9 @@ class Driver:
         if self.exists(by):
             elm_list = self.find_element_list(by)
             if not elm_list is None and len(elm_list) >= 1:
-                # ランダムにクリック
-                self.click_element(elm_list[random.randrange(len(elm_list))])
-                return True
+                # ランダムにクリック（3件以上あるときは最後を選ばせない）
+                limit = len(elm_list) - 1 if len(elm_list) >= 3 else len(elm_list)
+                return self.click_element(elm_list[random.randrange(limit)])
             else:
                 return False
     

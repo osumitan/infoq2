@@ -75,7 +75,6 @@ class Enquete:
         # 特殊質問文があったら回答
         for spdata in self.data.question.special:
             if self.drv.exists(spdata.text):
-                self.drv.click(spdata.answer)
-                return True
+                return self.drv.click(spdata.answer)
         else:
             return False

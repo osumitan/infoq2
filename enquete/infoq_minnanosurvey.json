@@ -5,9 +5,33 @@
         "url_re": "^.*/minnanosurvey\\.com/.*$"
     },
     "question": {
-        "next_button": { "id": "css", "selector": "" },
-        "final_text": { "id": "css", "selector": "" },
-        "final_button": { "id": "css", "selector": "" },
-        "general": []
+        "next_button": { "id": "css", "selector": "button.next-btn" },
+        "final_text": { "id": "xpath", "selector": "//button[contains(@class,'next-btn') and contains(text(),'回答を完了する')]" },
+        "final_button": { "id": "xpath", "selector": "//button[contains(@class,'next-btn') and contains(text(),'回答を完了する')]" },
+        "general": [
+            { "id": "css", "selector": "label[for^=Q]" }
+        ],
+        "special": [
+            {
+                "text": { "id": "xpath", "selector": "//p[contains(@class,'question-count') and contains(text(),'あなたの性別をお知らせください。')]" },
+                "answer": { "id": "xpath", "selector": "//label[starts-with(@for,'Q') and contains(text(),'男性')]" }
+            },
+            {
+                "text": { "id": "xpath", "selector": "//p[contains(@class,'question-count') and contains(text(),'あなたの年齢をお知らせください。')]" },
+                "answer": { "id": "xpath", "selector": "//label[starts-with(@for,'Q') and contains(text(),'40-49歳')]" }
+            },
+            {
+                "text": { "id": "xpath", "selector": "//p[contains(@class,'question-count') and contains(text(),'あなたのお住まいをお知らせください。')]" },
+                "answer": { "id": "xpath", "selector": "//label[starts-with(@for,'Q') and contains(text(),'関東地方')]" }
+            },
+            {
+                "text": { "id": "xpath", "selector": "//p[contains(@class,'question-count') and contains(text(),'あなたの婚姻状況をお知らせください。')]" },
+                "answer": { "id": "xpath", "selector": "//label[starts-with(@for,'Q') and contains(text(),'既婚')]" }
+            },
+            {
+                "text": { "id": "xpath", "selector": "//p[contains(@class,'question-count') and contains(text(),'あなたのご職業をお知らせください。')]" },
+                "answer": { "id": "xpath", "selector": "//label[starts-with(@for,'Q') and contains(text(),'会社員（契約・派遣社員含む）')]" }
+            }
+        ]
     }
 }
