@@ -1,0 +1,34 @@
+{
+    "site": {
+        "name": "shopping_now",
+        "description": "～に関するアンケート",
+        "url_re": "^.*/shopping-now\\.jp/.*$",
+        "iframe": { "id": "css", "selector": "iframe#iframe" }
+    },
+    "question": {
+        "next_button": { "id": "css", "selector": "div.btn_next input" },
+        "final_text": { "id": "xpath", "selector": "//div[contains(@class,'question_last') or contains(@class,'question_thanks')]" },
+        "final_button": { "id": "xpath", "selector": "//div[contains(@class,'btn_next') or contains(@class,'btn_2next')]/input" },
+        "general": [
+            { "id": "xpath", "selector": "//label[starts-with(@for,'q')]" }
+        ],
+        "special": [
+            {
+                "text": { "id": "xpath", "selector": "//h2[contains(text(),'あなたの性別を教えてください。')]" },
+                "answer": { "id": "xpath", "selector": "//label[starts-with(@for,'q') and contains(text(),'男性')]" }
+            },
+            {
+                "text": { "id": "xpath", "selector": "//h2[contains(text(),'あなたの年齢をお知らせください。')]" },
+                "answer": { "id": "xpath", "selector": "//label[starts-with(@for,'q') and contains(text(),'40代')]" }
+            },
+            {
+                "text": { "id": "xpath", "selector": "//h2[contains(text(),'あなたのお住まいを選択してください。')]" },
+                "answer": { "id": "xpath", "selector": "//label[starts-with(@for,'q') and contains(text(),'関東')]" }
+            },
+            {
+                "text": { "id": "xpath", "selector": "//h2[contains(text(),'あなたのご職業をお知らせください。')]" },
+                "answer": { "id": "xpath", "selector": "//label[starts-with(@for,'q') and contains(text(),'会社員（契約・派遣社員含む')]" }
+            }
+        ]
+    }
+}

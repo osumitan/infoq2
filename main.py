@@ -1,12 +1,10 @@
-import sys
-import io
-from host import InfoQHost
+from host import Host
 
 # メイン
 def main():
-    h = InfoQHost()
+    h = Host("infoq")
     h.login()
-    h.start()
+    h.run()
     h.logout()
     h.close()
 

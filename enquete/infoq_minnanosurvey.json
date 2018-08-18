@@ -1,0 +1,13 @@
+{
+    "site": {
+        "name": "minnanosurvey",
+        "description": "みんなのしつもん！",
+        "url_re": "^.*/minnanosurvey\\.com/.*$"
+    },
+    "question": {
+        "next_button": { "id": "css", "selector": "" },
+        "final_text": { "id": "css", "selector": "" },
+        "final_button": { "id": "css", "selector": "" },
+        "general": []
+    }
+}

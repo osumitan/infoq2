@@ -1,8 +1,10 @@
-import sys
-import io
 import time
+import random
 from selenium import webdriver
 from selenium.common import exceptions
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions
 
 # ドライバ
 class Driver:
@@ -19,7 +21,7 @@ class Driver:
         self.__drv = webdriver.Chrome("../lib/chromedriver.exe")
         self.__drv.set_window_size(1152, 768)
         self.__drv.set_window_position(376, 44)
-        self.__drv.set_page_load_timeout(20)
+        self.__drv.set_page_load_timeout(60)
     
     # ウィンドウを閉じる
     def close_window(self):
@@ -72,6 +74,17 @@ class Driver:
         else:
             return None
     
+    # フレームにスイッチ
+    # by: By
+    def switch_frame(self, by):
+        if self.exists(by):
+            self.__drv.switch_to.frame(self.find_element(by))
+    
+    # 現在のURLを取得
+    # return: URL
+    def get_url(self):
+        return self.__drv.current_url
+    
     # ページ移動
     # url: URL
     def go(self, url):
@@ -90,8 +103,8 @@ class Driver:
             elif retry < self.RETRY_LIMIT:
                 retry += 1
                 time.sleep(self.RETRY_INTERVAL)
-        else:
-            return None
+            else:
+                return None
     
     # エレメントリストを検索
     # by: By
@@ -106,8 +119,8 @@ class Driver:
             elif retry < self.RETRY_LIMIT:
                 retry += 1
                 time.sleep(self.RETRY_INTERVAL)
-        else:
-            return []
+            else:
+                return []
     
     # エレメントが存在するか
     # by: By
@@ -118,7 +131,7 @@ class Driver:
     
     # クリック
     # by: By
-    # return: bool
+    # return: クリックしたか
     def click(self, by):
         if self.exists(by):
             self.click_element(self.find_element(by))
@@ -133,6 +146,11 @@ class Driver:
         retry = 0
         while True:
             try:
+                # マウスオーバー
+                ac = ActionChains(self.__drv)
+                ac.move_to_element(elm)
+                ac.perform()
+                # クリック
                 elm.click()
                 break
             except exceptions.WebDriverException as e:
@@ -141,6 +159,20 @@ class Driver:
                     time.sleep(self.RETRY_INTERVAL)
                 else:
                     raise e
+    
+    # ランダムクリック
+    # by: By
+    # return: クリックしたか
+    def click_random(self, by):
+        # エレメントを検索
+        if self.exists(by):
+            elm_list = self.find_element_list(by)
+            if not elm_list is None and len(elm_list) >= 1:
+                # ランダムにクリック
+                self.click_element(elm_list[random.randrange(len(elm_list))])
+                return True
+            else:
+                return False
     
     # value設定
     # by: By

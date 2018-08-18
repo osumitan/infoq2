@@ -1,12 +1,11 @@
-import sys
-import io
-from abc import ABCMeta
 from selenium import webdriver
 
 # Byを取得
 # data: データ
 def get_by(data):
-    if data["id"] == "css":
+    if data is None:
+        return None
+    elif data["id"] == "css":
         return ByCss(data["selector"])
     elif data["id"] == "xpath":
         return ByXPath(data["selector"])

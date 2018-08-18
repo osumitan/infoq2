@@ -1,7 +1,5 @@
-import sys
-import io
 import re
-from abc import ABCMeta
+import common
 from driver import Driver
 from host_data import HostData
 from enquete import Enquete
@@ -27,6 +25,11 @@ class Host:
         # ホストデータ
         self.data = HostData(self.name)
     
+    # ログ
+    # str: ログ文字列
+    def log(self, str):
+        common.log("{} - {}".format(self.data.name, str))
+    
     # クローズ
     def close(self):
         self.drv.switch_main_window(self.main_handle)
@@ -47,22 +50,36 @@ class Host:
         self.drv.set_value(data.password_text, data.password)
         # ログインボタンをクリック
         self.drv.click(data.login_button)
+        # ログ出力
+        self.log("ログイン")
     
     # ログアウト
     def logout(self):
         self.drv.click(self.data.login.logout_button)
+        self.log("ログアウト")
     
-    # スタート
-    def start(self):
+    # 実行
+    def run(self):
+        self.log("実行開始")
         while True:
             # 次のアンケートを開く
-            enq = self.open_next_enquete()
-            if enq is None:
+            handle = self.open_next_enquete()
+            if handle is None:
+                # 全アンケート完了
                 break
-            enq.close()
+            try:
+                # サイトを生成
+                enq = Enquete(self, handle)
+                # アンケート実行
+                enq.run()
+                # アンケートを閉じる
+                enq.close()
+            except(RuntimeWarning) as e:
+                self.log(e)
+                continue
     
     # 次のアンケートを開く
-    # return: bool
+    # return: サブウィンドウハンドル
     def open_next_enquete(self):
         data = self.data.enquete_list
         # メインウィンドウにスイッチ
@@ -72,27 +89,19 @@ class Host:
         # アンケートリストタブをクリック
         self.drv.click(data.enquete_list_tab)
         # アンケートリンクを取得
-        enq_list = self.drv.find_element_list(data.enquete_link_list)
+        enq_link_list = self.drv.find_element_list(data.enquete_link_list)
         # 古いものからチェック
-        if not enq_list is None:
-            for enq in reversed(enq_list):
+        if not enq_link_list is None:
+            for enq_link in reversed(enq_link_list):
                 # 未処理なら開く
-                enq_id = re.search(r"qid=([0-9a-f]+)", enq.get_attribute("onclick")).group(1)
+                enq_id = re.search(r"qid=([0-9a-f]+)", enq_link.get_attribute("onclick")).group(1)
                 if not enq_id in self.done_list:
                     # 処理済みに追加
                     self.done_list.append(enq_id)
                     # アンケートリンクをクリック
-                    self.drv.click_element(enq)
+                    self.drv.click_element(enq_link)
                     # サブウィンドウにスイッチ
-                    handle = self.drv.switch_sub_window(self.main_handle)
-                    # サイトを返す
-                    if not handle is None:
-                        return Enquete(self.drv, handle)
+                    return self.drv.switch_sub_window(self.main_handle)
         # 全アンケート完了
+        self.log("全アンケート終了")
         return None
-
-# ホスト：infoQ
-class InfoQHost(Host):
-    # コンストラクタ
-    def __init__(self):
-        super().__init__("infoq")
