@@ -72,10 +72,8 @@ class Host:
                 enq = Enquete(self, handle)
                 # アンケート実行
                 enq.run()
-                # アンケートを閉じる
-                enq.close()
             except(RuntimeWarning) as e:
-                self.log(e)
+                enq.log(e)
                 continue
     
     # 次のアンケートを開く

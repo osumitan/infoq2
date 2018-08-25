@@ -25,11 +25,6 @@ class Enquete:
     def log(self, str):
         self.host.log("{} - {}".format(self.data.site.name, str))
     
-    # クローズ
-    def close(self):
-        self.drv.switch_window(self.handle)
-        self.drv.close_window()
-    
     # アンケート実行
     def run(self):
         # ログ出力
@@ -45,7 +40,9 @@ class Enquete:
             # 質問に回答
             self.answer_question()
             # 次へボタンをクリック
-            self.drv.click(self.data.question.next_button)
+            if not self.drv.click(self.data.question.next_button):
+                # 次へボタンがクリックできないときは中断
+                raise RuntimeWarning("次へボタンがクリックできない")
         else:
             # ログ出力
             self.log("最終質問")

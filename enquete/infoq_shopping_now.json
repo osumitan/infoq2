@@ -1,7 +1,6 @@
 {
     "site": {
         "name": "shopping_now",
-        "description": "～に関するアンケート",
         "url_re": "^.*/shopping-now\\.jp/.*$",
         "iframe": { "id": "css", "selector": "iframe#iframe" }
     },

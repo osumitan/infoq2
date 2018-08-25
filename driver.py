@@ -152,6 +152,9 @@ class Driver:
     # elm: エレメント
     # return: クリックしたか
     def click_element(self, elm):
+        # 有効チェック
+        if not elm.is_enabled():
+            return False
         # エラー発生時はリトライ
         retry = 0
         while True:

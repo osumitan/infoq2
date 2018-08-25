@@ -70,7 +70,6 @@ class EnqueteData:
 # アンケートデータ／サイト情報
 class EnqueteDataSite:
     name = None
-    description = None
     url_re = None
     iframe = None
 
@@ -79,8 +78,6 @@ class EnqueteDataSite:
     def __init__(self, data):
         # サイト名
         self.name = data["name"]
-        # サイト説明
-        self.description = data["description"]
         # URLの正規表現
         self.url_re = re.compile(data["url_re"])
         # iframe
