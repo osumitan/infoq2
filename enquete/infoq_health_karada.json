@@ -8,10 +8,21 @@
         "final_text": { "id": "xpath", "selector": "//div[contains(@class,'title-msg') and contains(string(.),'ご協力いただきありがとうございました！')]" },
         "final_button": { "id": "css", "selector": "#nextbtn" },
         "general": [
-            { "id": "css", "selector": "label[for^=Q]" },
-            { "id": "css", "selector": "label[for^=S]" }
+            { "id": "css", "selector": "label[for^=Q]" }
         ],
         "special": [
+            {
+                "text": { "id": "xpath", "selector": "//div[contains(@class,'question-label') and contains(string(.),'昨日、食事を何回摂られましたか。')]" },
+                "answer": { "id": "xpath", "selector": "//label[starts-with(@for,'S') and contains(string(.),'3回')]" }
+            },
+            {
+                "text": { "id": "xpath", "selector": "//div[contains(@class,'question-label') and contains(string(.),'昨日、職場もしくは学校以外に出かけましたか。')]" },
+                "answer": { "id": "xpath", "selector": "//label[starts-with(@for,'S') and contains(string(.),'出かけた')]" }
+            },
+            {
+                "text": { "id": "xpath", "selector": "//div[contains(@class,'question-label') and contains(string(.),'昨日は充実した1日を過ごすことができましたか。')]" },
+                "answer": { "id": "xpath", "selector": "//label[starts-with(@for,'S') and contains(string(.),'どちらともいえない')]" }
+            },
             {
                 "text": { "id": "xpath", "selector": "//div[contains(@class,'question-label') and contains(string(.),'あなたの性別をお知らせください。')]" },
                 "answer": { "id": "xpath", "selector": "//label[starts-with(@for,'F') and contains(string(.),'男性')]" }
