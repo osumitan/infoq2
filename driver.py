@@ -23,7 +23,7 @@ class Driver:
         self.__drv = webdriver.Chrome("../lib/chromedriver.exe")
         self.__drv.set_window_size(1152, 768)
         self.__drv.set_window_position(376, 44)
-        self.__drv.set_page_load_timeout(20)
+        self.__drv.set_page_load_timeout(60)
         # ホスト
         self.host = host
     
