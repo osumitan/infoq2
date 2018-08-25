@@ -1,7 +1,7 @@
 {
     "site": {
         "name": "quiz",
-        "url_re": "^.*/(nandokun\\.com|kokkikun\\.com)/.*$"
+        "url_re": "^.*/(nandokun\\.com|kokkikun\\.com|kenko-gourmet\\.com)/.*$"
     },
     "question": {
         "next_button": { "id": "css", "selector": "button.next-btn" },
