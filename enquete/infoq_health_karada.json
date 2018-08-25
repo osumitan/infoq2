@@ -1,0 +1,41 @@
+{
+    "site": {
+        "name": "health_karada",
+        "url_re": "^.*/health-karada\\.com/.*$"
+    },
+    "question": {
+        "next_button": { "id": "css", "selector": "#nextbtn" },
+        "final_text": { "id": "xpath", "selector": "//div[contains(@class,'title-msg') and contains(string(.),'ご協力いただきありがとうございました！')]" },
+        "final_button": { "id": "css", "selector": "#nextbtn" },
+        "general": [
+            { "id": "css", "selector": "label[for^=Q]" },
+            { "id": "css", "selector": "label[for^=S]" }
+        ],
+        "special": [
+            {
+                "text": { "id": "xpath", "selector": "//div[contains(@class,'question-label') and contains(string(.),'あなたの性別をお知らせください。')]" },
+                "answer": { "id": "xpath", "selector": "//label[starts-with(@for,'F') and contains(string(.),'男性')]" }
+            },
+            {
+                "text": { "id": "xpath", "selector": "//div[contains(@class,'question-label') and contains(string(.),'あなたの年齢をお知らせください。')]" },
+                "answer": { "id": "xpath", "selector": "//label[starts-with(@for,'F') and contains(string(.),'40-49歳')]" }
+            },
+            {
+                "text": { "id": "xpath", "selector": "//div[contains(@class,'question-label') and contains(string(.),'あなたのお住まいをお知らせください。')]" },
+                "answer": { "id": "xpath", "selector": "//label[starts-with(@for,'F') and contains(string(.),'関東地方')]" }
+            },
+            {
+                "text": { "id": "xpath", "selector": "//div[contains(@class,'question-label') and contains(string(.),'あなたの婚姻状況をお知らせください。')]" },
+                "answer": { "id": "xpath", "selector": "//label[starts-with(@for,'F') and contains(string(.),'既婚')]" }
+            },
+            {
+                "text": { "id": "xpath", "selector": "//div[contains(@class,'question-label') and contains(string(.),'あなたのご職業をお知らせください。')]" },
+                "answer": { "id": "xpath", "selector": "//label[starts-with(@for,'F') and contains(string(.),'会社員（契約・派遣社員含む）')]" }
+            },
+            {
+                "text": { "id": "xpath", "selector": "//div[contains(@class,'question-label') and contains(string(.),'あなたと同居しているご家族の方をお知らせください。')]" },
+                "answer": { "id": "xpath", "selector": "//label[starts-with(@for,'F') and contains(string(.),'同居していない')]" }
+            }
+        ]
+    }
+}
