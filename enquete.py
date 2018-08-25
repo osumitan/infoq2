@@ -29,6 +29,8 @@ class Enquete:
     def run(self):
         # ログ出力
         self.log("アンケート開始")
+        # スタートボタンをクリック
+        self.drv.click(self.data.question.start_button)
         # アンケート回答をループ
         qn = 0
         while(self.continues()):

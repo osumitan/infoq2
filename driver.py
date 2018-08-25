@@ -179,6 +179,8 @@ class Driver:
                 ac = ActionChains(self.__drv)
                 ac.move_to_element(elm)
                 ac.perform()
+                # 1秒待つ
+                time.sleep(1)
                 # クリック
                 elm.click()
                 return True

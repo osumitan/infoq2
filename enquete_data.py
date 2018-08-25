@@ -91,6 +91,7 @@ class EnqueteDataSite:
 
 # アンケートデータ／質問情報
 class EnqueteDataQuestion:
+    start_button = None
     next_button = None
     final_text = None
     final_button = None
@@ -100,6 +101,8 @@ class EnqueteDataQuestion:
     # コンストラクタ
     # data: データ
     def __init__(self, data):
+        # スタートボタン
+        self.start_button = by.get_by(data["start_button"]) if "start_button" in data else None
         # 次へボタン
         self.next_button = by.get_by(data["next_button"])
         # 最終質問文

@@ -1,0 +1,15 @@
+{
+    "site": {
+        "name": "quiz",
+        "url_re": "^.*/brandmall-town\\.jp/.*$"
+    },
+    "question": {
+        "start_button": { "id": "css", "selector": "input.btn" },
+        "next_button": { "id": "css", "selector": "div.bnBox p.btm input.btn" },
+        "final_text": { "id": "xpath", "selector": "//div[contains(@class,'end_area') and contains(string(.),'ご回答ありがとうございました。')]" },
+        "final_button": { "id": "css", "selector": "input.btn" },
+        "general": [
+            { "id": "css", "selector": "label.adchange input" }
+        ]
+    }
+}
