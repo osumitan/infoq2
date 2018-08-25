@@ -73,7 +73,7 @@ class Host:
                 # アンケート実行
                 enq.run()
             except(RuntimeWarning) as e:
-                enq.log(e)
+                self.log(e)
                 continue
     
     # 次のアンケートを開く

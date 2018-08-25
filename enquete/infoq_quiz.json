@@ -1,0 +1,14 @@
+{
+    "site": {
+        "name": "quiz",
+        "url_re": "^.*/(nandokun\\.com|kokkikun\\.com)/.*$"
+    },
+    "question": {
+        "next_button": { "id": "css", "selector": "button.next-btn" },
+        "final_text": { "id": "xpath", "selector": "//button[contains(@class,'next-btn') and contains(text(),'回答を完了する')]" },
+        "final_button": { "id": "xpath", "selector": "//button[contains(@class,'next-btn') and contains(text(),'回答を完了する')]" },
+        "general": [
+            { "id": "css", "selector": "label[for^=Q]" }
+        ]
+    }
+}
