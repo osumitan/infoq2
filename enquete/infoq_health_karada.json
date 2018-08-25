@@ -1,7 +1,7 @@
 {
     "site": {
         "name": "health_karada",
-        "url_re": "^.*/health-karada\\.com/.*$"
+        "url_re": "^.*/(health-karada\\.com|tokyo-start\\.com)/.*$"
     },
     "question": {
         "next_button": { "id": "css", "selector": "#nextbtn" },
