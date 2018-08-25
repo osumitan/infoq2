@@ -8,20 +8,29 @@ from selenium.webdriver.support import expected_conditions
 
 # ドライバ
 class Driver:
-    # ドライバ
-    __drv = None
     # リトライ間隔（秒）
     RETRY_INTERVAL = 2
     # リトライ回数
-    RETRY_LIMIT = 10
+    RETRY_LIMIT = 30
+    
+    __drv = None
+    host = None
 
     # コンストラクタ
-    def __init__(self):
+    # host: ホスト
+    def __init__(self, host):
         # ドライバ初期化
         self.__drv = webdriver.Chrome("../lib/chromedriver.exe")
         self.__drv.set_window_size(1152, 768)
         self.__drv.set_window_position(376, 44)
         self.__drv.set_page_load_timeout(20)
+        # ホスト
+        self.host = host
+    
+    # ログ
+    # str: ログ文字列
+    def log(self, str):
+        self.host.log("{} - {}".format("driver", str))
     
     # ウィンドウを閉じる
     def close_window(self):
@@ -72,6 +81,8 @@ class Driver:
                 else:
                     break
         else:
+            if wait:
+                self.log("timeout - switch_sub_window")
             return None
     
     # フレームにスイッチ
@@ -104,6 +115,8 @@ class Driver:
                 retry += 1
                 time.sleep(self.RETRY_INTERVAL)
             else:
+                if wait:
+                    self.log("timeout - find_element")
                 return None
     
     # エレメントリストを検索
@@ -120,6 +133,8 @@ class Driver:
                 retry += 1
                 time.sleep(self.RETRY_INTERVAL)
             else:
+                if wait:
+                    self.log("timeout - find_element_list")
                 return []
     
     # エレメントが存在するか
@@ -144,6 +159,7 @@ class Driver:
                         retry += 1
                         time.sleep(self.RETRY_INTERVAL)
                     else:
+                        self.log("timeout - click")
                         raise e
         else:
             return False
@@ -175,6 +191,7 @@ class Driver:
                     retry += 1
                     time.sleep(self.RETRY_INTERVAL)
                 else:
+                    self.log("timeout - click_element")
                     raise e
     
     # ランダムクリック

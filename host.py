@@ -21,7 +21,7 @@ class Host:
         # ホスト名
         self.name = name
         # ドライバ
-        self.drv = Driver()
+        self.drv = Driver(self)
         # ホストデータ
         self.data = HostData(self.name)
     
