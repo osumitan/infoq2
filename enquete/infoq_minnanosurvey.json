@@ -1,7 +1,7 @@
 {
     "site": {
         "name": "minnanosurvey",
-        "url_re": "^.*/minnanosurvey\\.com/.*$"
+        "url_re": "^.*/(minnanosurvey\\.com|enq\\.minsitu\\.net)/.*$"
     },
     "question": {
         "next_button": { "id": "css", "selector": "button.next-btn" },
