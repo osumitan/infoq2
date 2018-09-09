@@ -87,7 +87,7 @@ class Host:
         # アンケートリストタブをクリック
         self.drv.click(data.enquete_list_tab)
         # アンケートリンクを取得
-        enq_link_list = self.drv.find_element_list(data.enquete_link_list)
+        enq_link_list = self.drv.find_element_list(data.enquete_link_list, False)
         # 古いものからチェック
         if not enq_link_list is None:
             for enq_link in reversed(enq_link_list):
