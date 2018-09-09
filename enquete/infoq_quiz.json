@@ -1,7 +1,7 @@
 {
     "site": {
         "name": "quiz",
-        "url_re": "^.*/(nandokun\\.com|kokkikun\\.com|kenko-gourmet\\.com|shigoto-hoken\\.com|medicine-good\\.com|question-hiroba\\.com)/.*$"
+        "url_re": "^.*/(nandokun\\.com|kokkikun\\.com|kenko-gourmet\\.com|shigoto-hoken\\.com|medicine-good\\.com|question-hiroba\\.com|minitame\\.com)/.*$"
     },
     "question": {
         "next_button": { "id": "css", "selector": "button.next-btn" },
