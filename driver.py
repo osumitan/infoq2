@@ -94,12 +94,35 @@ class Driver:
     # 現在のURLを取得
     # return: URL
     def get_url(self):
-        return self.__drv.current_url
+        retry = 0
+        while True:
+            try:
+                return self.__drv.current_url
+            except exceptions.TimeoutException as e:
+                # リトライ
+                if retry < self.RETRY_LIMIT:
+                    retry += 1
+                    time.sleep(self.RETRY_INTERVAL)
+                else:
+                    self.log("timeout - get_url")
+                    raise e
     
     # ページ移動
     # url: URL
     def go(self, url):
-        self.__drv.get(url)
+        retry = 0
+        while True:
+            try:
+                self.__drv.get(url)
+                return
+            except exceptions.TimeoutException as e:
+                # リトライ
+                if retry < self.RETRY_LIMIT:
+                    retry += 1
+                    time.sleep(self.RETRY_INTERVAL)
+                else:
+                    self.log("timeout - go")
+                    raise e
     
     # エレメントを検索
     # by: By
